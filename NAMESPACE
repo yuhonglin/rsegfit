@@ -1,0 +1,3 @@
+useDynLib(segfit, .registration = TRUE)
+
+export("segfit")

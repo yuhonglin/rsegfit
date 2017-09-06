@@ -1,0 +1,10 @@
+Package: rsegfit
+Type: Package
+Title: An r package for segfit
+Version: 0.1
+Date: 2017-09-05
+Maintainer: Honglin Yu
+Description: An r interface to segfit algorithm
+Depends: R (>= 2.15.0)
+License: GPL (>= 2)
+NeedsCompilation: yes
