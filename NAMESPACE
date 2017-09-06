@@ -1,3 +1,4 @@
 useDynLib(rsegfit)
 
 export("segfit")
+export("plot.segfit")
