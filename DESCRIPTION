@@ -7,3 +7,4 @@ Description: An r interface to segfit algorithm
 Depends: R (>= 2.15.0)
 License: GPL (>= 2)
 NeedsCompilation: yes
+RoxygenNote: 6.0.1
