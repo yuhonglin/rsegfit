@@ -37,15 +37,18 @@ segfit <- function(data, smp=2.3, lb=-6., ub=6., maxiter=1000, factr=5000, pgtol
 
         for (j in 1:(p[2,i] - p[1,i] + 1)) {
             fitted[j] = (p[3,i] * j^p[4,i] + p[5,i])*ratio
-            if (i==1)
-                residual[j]  = data[j] - fitted[j]
-            else
-                residual[j]  = data[p[2,i-1]+j] - fitted[j]
         }
 
         if (p[6,i] == 1) {
             fitted = rev(fitted)
-            residual = rev(residual)
+        }
+
+        for (j in 1:(p[2,i] - p[1,i] + 1)) {
+            if (i==1) {
+                residual[j]  = data[j] - fitted[j]
+            } else {
+                residual[j]  = data[p[2,i-1]+j] - fitted[j]
+            }
         }
         
         ret[[i]] = list(
