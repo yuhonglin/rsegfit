@@ -62,7 +62,14 @@ segfit <- function(data, smp=2.3, lb=-6., ub=6., maxiter=1000, factr=5000, pgtol
 
     ## also append the original sequence, use attr to
     ## make "length(ret) == #segments"
-    attr(ret, "data") <- data 
+    attr(ret, "data") <- data
+    ## other attributes
+    attr(ret, "smp")  <- smp
+    attr(ret, "lb")   <- lb
+    attr(ret, "ub")   <- ub
+    attr(ret, "maxiter") <- maxiter
+    attr(ret, "factr")   <- 5000
+    attr(ret, "pgtol")   <- pgtol
 
     class(ret) <- "segfit"
     return (ret);
@@ -102,6 +109,7 @@ plot.segfit <- function(x, y='', col.data='black', col.seg='red', legend.pos="to
 ##' @export 
 summary.segfit <- function(sf) {
     cat(sprintf('Number of segments: %d\n', length(sf)))
+    cat(sprintf('smp: %f\n', attr(sf, "smp")))
 
     cat(sprintf('% 8s% 8s% 8s% 8s% 8s% 8s% 8s% 8s\n',
                 'Segment', 'hi', 'ti', 'a', 'b', 'c', 'mse', 'var.res'))
