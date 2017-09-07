@@ -123,3 +123,55 @@ summary.segfit <- function(sf) {
                       sf[[i]]$c, mean(sf[[i]]$res^2), var(sf[[i]]$res)))
     }
 }
+
+##' Extract the residuals from a segfit object
+##'
+##' Extract the residuals from a segfit object
+##' @title Extract the residuals from a segfit object
+##' @param sf The segfit object
+##' @param concat Whether the residuals of different segments will be
+##'               concatenated.
+##' @return If concat==TRUE, the residuals of different segments
+##'               will be concatenated into one vector. Otherwise,
+##'               the returned value will be a list of residuals
+##'               of each segment.
+##' @export
+residuals.segfit <- function(sf, concat=TRUE) {
+    if (concat==TRUE) {
+        ret = rep(NA, length(attr(sf, "data")))
+        stidx = 1
+        for (i in 1:length(sf)) {
+            ret[stidx:(stidx + length(sf[[i]]$res) - 1)] = sf[[i]]$res
+            stidx = stidx + length(sf[[i]]$res)
+        }
+        return (ret)
+    } else {
+        return (lapply(sf, function(x) {x$res}))
+    }
+}
+
+##' Extract the fitted values from a segfit object
+##'
+##' Extract the fitted values from a segfit object
+##' @title Extract the fitted values from a segfit object
+##' @param sf The segfit object
+##' @param concat Whether the fitted values of different segments will be
+##'               concatenated.
+##' @return If concat==TRUE, the fitted values of different segments
+##'               will be concatenated into one vector. Otherwise,
+##'               the returned value will be a list of fitted values
+##'               of each segment.
+##' @export
+fitted.segfit <- function(sf, concat=TRUE) {
+    if (concat==TRUE) {
+        ret = rep(NA, length(attr(sf, "data")))
+        stidx = 1
+        for (i in 1:length(sf)) {
+            ret[stidx:(stidx + length(sf[[i]]$fit) - 1)] = sf[[i]]$fit
+            stidx = stidx + length(sf[[i]]$fit)
+        }
+        return (ret)
+    } else {
+        return (lapply(sf, function(x) {x$fit}))
+    }    
+}
