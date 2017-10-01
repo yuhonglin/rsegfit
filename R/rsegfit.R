@@ -89,19 +89,19 @@ segfit <- function(data, smp=2.3, lb=-6., ub=6., maxiter=1000, factr=5000, pgtol
 ##' @param col.seg  color of segments
 ##' @param legend.pos legend positions
 ##' @export 
-plot.segfit <- function(x, y='', col.data='black', col.seg='red', legend.pos="topleft") {
+plot.segfit <- function(x, y='', col.data='black', col.seg='red', legend.pos="topleft", ...) {
     if (y == '') {
         y = x;
         x = 1:length(attr(y,"data"))
     }
 
-    plot.default(x, attr(y, "data"), type="l", col=col.data)
+    plot.default(x, attr(y, "data"), type="l", col=col.data, ...)
     
     for (i in 1:length(y)) {
         lines(x[y[[i]]$hi:y[[i]]$ti], y[[i]]$fit, col=col.seg)
     }
 
-    legend(x='topleft', legend=c("data", "segments"), lty=c(1,1), col=c('black', 'red'))
+    legend(x=legend.pos, legend=c("data", "segments"), lty=c(1,1), col=c('black', 'red'))
 }
 
 ##' Summarise a segfit object
